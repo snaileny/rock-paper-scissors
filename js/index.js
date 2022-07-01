@@ -9,7 +9,7 @@ const GAME_RESULTS = {
 
 }
 
-const RVS = {
+const RPS = {
 
     rock: "✊",
     paper: "✋",
