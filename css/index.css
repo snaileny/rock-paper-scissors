@@ -1,0 +1,242 @@
+:root {
+
+    --background: rgb(250, 250, 250);
+    --background-dark: rgb(132, 132, 132);
+    --button: rgb(240, 240, 240);
+    --button-dark: rgb(232, 232, 232);
+
+}
+
+@keyframes shake {
+
+    50%   {transform: translateY(-10px) rotate(-90deg);}
+    70%   {transform: translateY(20px) rotate(-90deg);}
+
+}
+
+* {
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+
+    height: 100vh;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.shake {
+
+    animation-name: shake;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+    animation-timing-function: ease;
+
+}
+
+.game {
+
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 2rem 0 0;
+    font-size: 2rem;
+    text-align: center;
+    user-select: none;
+
+}
+
+.game-playerSecond {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: 0;
+    background-color: var(--background);
+    font-size: 1.8rem;
+
+}
+
+.playerSecond-choice {
+
+    display: inline;
+    padding: 0 0 0.8rem 0;
+    transform: rotate(-90deg);
+
+} 
+
+.playerSecond-points {
+
+    margin: 1rem 0 0 0;
+
+}
+
+.game-result {
+
+    padding: 1rem;
+    background-color: var(--background);
+
+}
+
+.game-result span {
+
+    width: 14rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+
+}
+
+.game-playerFirst {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0 0 12rem 0;
+    border: 0;
+    background-color: var(--background);
+    font-size: 2.5rem;
+
+}
+
+.playerFirst-choice {
+
+    display: inline;
+    padding: 0 0 1rem 0;
+    transform: rotate(-90deg);
+
+}
+
+.playerFirst-points {
+
+    width: 100%;
+    border-bottom: solid black 2px;
+    padding: 0 0 0.8rem 0;
+    margin: 1rem 0 1.2rem 0;
+
+}
+
+.playerFirst-selection button {
+
+    height: 4rem;
+    width: 4rem;
+    padding: 0;
+    border: 0;
+    background-color: var(--button);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 50ms ease-out;
+
+}
+
+.playerFirst-selection button:hover {
+
+    transform: translateY(-2px);
+    background-color: var(--button-dark);
+    box-shadow: 0px 1px 4px 0px var(--background-dark);
+
+}
+
+.playerFirst-selection button:active {
+
+    border: solid black 2px;
+    transform: translateY(0px);
+
+}
+
+.menu {
+
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 3rem;
+    right: 32rem;
+    font-size: 1.2rem;
+
+}
+
+.menu-scoreboard {
+
+    padding: 1rem;
+    margin: 1rem 0 0 0;
+    background-color: var(--background);
+
+}
+
+.menu-settings {
+
+    padding: 1rem;
+    margin: 1rem 0 0 0;
+    background-color: var(--background);
+
+}
+
+.menu-settings button {
+
+    height: 2rem;
+    width: 8rem;
+    display: block;
+    padding: 0;
+    margin: 0.4rem 0 0 0;
+    border: 0;
+    background-color: var(--button);
+    font-size: 1.2rem;
+    cursor: pointer;
+
+}
+
+.menu-settings button:hover {
+
+    background-color: var(--button-dark);
+
+}
+
+.menu-settings button:active {
+
+    border: solid black 2px;
+
+}
+
+.menu h4 {
+
+    border-bottom: solid black 1px;
+    padding: 0 0 4px 0;
+    margin: 0 0 0.6rem 0;
+
+}
+
+.menu div {
+
+    margin: 0.4rem 0 0 0;
+
+}
+
+.menu label {
+
+    display: block;
+
+}
+
+.menu input {
+
+    width: 5rem;
+    font-size: 1.8rem;
+
+}
+
+#round-selector {
+
+    display: block;
+
+}

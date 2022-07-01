@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <script type="module" src="./js/index.js"></script>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div class="game">
+        <div class="game-playerSecond">
+            <div class="playerSecond-choice">
+                <div>✊</div>
+            </div>
+            <div class="playerSecond-points">
+                <div>BOT: <span>0</span></div>
+            </div>
+        </div>
+        <div class="game-result">
+            <div>...</div>
+            <span>start a new game to play</span>
+        </div>
+        <div class="game-playerFirst">
+            <div class="playerFirst-choice">
+                <div>✊</div>
+            </div>
+            <div class="playerFirst-points">
+                <div>You: <span>0</span></div>
+            </div>
+            <div class="playerFirst-selection">
+                <button type="button" value="rock" id="rock">✊</button>
+                <button type="button" value="paper" id="paper">✋</button>
+                <button type="button" value="scissors" id="scissors">✌</button>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <div class="menu-scoreboard">
+            <h4>Total Wins:</h4>
+            <div>Bot: <span id="bot-score">0</span></div>
+            <div>Player: <span id="player-score">0</span></div>
+        </div>
+        <div class="menu-settings">
+            <h4>Game:</h4>
+            <div>Total Rounds: <span id="total-rounds">0</span></div>
+            <div>Rounds left: <span id="rounds-left">0</span></div>
+        </div>
+        <div class="menu-settings">
+            <h4>Settings:</h4>
+            <label for="round-number">Rounds:</label>
+            <input type="number" id="round-number">
+            <button type="button" value="new-game" id="new-game">New Game</button>
+        </div>
+    </div>
+</body>
+</html>
