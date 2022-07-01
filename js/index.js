@@ -234,8 +234,8 @@ function init() {
 
     function setChoice(playerChoice, botChoice) {
 
-        elements.playerFirstChoice.textContent = RVS[playerChoice];
-        elements.playerSecondChoice.textContent = RVS[botChoice];
+        elements.playerFirstChoice.textContent = RPS[playerChoice];
+        elements.playerSecondChoice.textContent = RPS[botChoice];
 
     }
 
