@@ -46,7 +46,6 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 0 2rem 0 0;
     font-size: 2rem;
     text-align: center;
     user-select: none;
@@ -68,8 +67,7 @@ body {
 
 .playerSecond-choice {
 
-    display: inline;
-    padding: 0 0 0.8rem 0;
+    padding: 0 0 0.8rem 0;  
     transform: rotate(-90deg);
 
 } 
@@ -156,12 +154,11 @@ body {
 
 .menu {
 
-    height: 4rem;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 3rem;
-    right: 32rem;
+    position: fixed;
+    top: 5%;
+    right: 5%;
     font-size: 1.2rem;
 
 }
@@ -210,9 +207,7 @@ body {
 
 .menu h4 {
 
-    border-bottom: solid black 1px;
-    padding: 0 0 4px 0;
-    margin: 0 0 0.6rem 0;
+    margin: 0 0 0.4rem 0;
 
 }
 
@@ -238,5 +233,72 @@ body {
 #round-selector {
 
     display: block;
+
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .game {
+
+        height: auto;
+
+    }
+
+    .game > div {
+
+        margin-bottom: 1rem;
+
+    }
+
+    .menu {
+
+        position: static;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 1rem;
+
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    body {
+
+        height: 100%;
+
+    }
+
+    .game {
+
+        margin-top: 1rem;
+
+    }
+
+    .menu {
+
+        width: 100%;
+        position: static;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 1rem;
+        font-size: 1rem;
+
+    }
+
+    .menu > div {
+
+        width: 100%;
+
+    }
 
 }
