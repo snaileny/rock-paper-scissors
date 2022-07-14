@@ -1,208 +1,232 @@
-const GAME_RESULTS = {
+const rockPaperScissors = (() => {
 
-    roundDraw: 0,
-    roundFirst: 1,
-    roundSecond: 2,
-    gameDraw: 3,
-    gameFirst: 4,
-    gameSecond: 5
+    const GAME_RESULTS = {
 
-}
-
-const RPS = {
-
-    rock: "✊",
-    paper: "✋",
-    scissors: "✌"
-
-}
-
-const elements = {
-
-    playerFirstChoice: document.querySelector(".playerFirst-choice div"),
-    playerSecondChoice: document.querySelector(".playerSecond-choice div"),
-    playerFirstPoints: document.querySelector(".playerFirst-points span"),
-    playerSecondPoints: document.querySelector(".playerSecond-points span"),
-    gameResult: document.querySelector(".game-result div"),
-    gameResultDesc: document.querySelector(".game-result span"),
-    rockButton: document.querySelector("#rock"),
-    paperButton: document.querySelector("#paper"),
-    scissorsButton: document.querySelector("#scissors"),
-    roundsTotal: document.querySelector("#total-rounds"),
-    roundsLeft: document.querySelector("#rounds-left"),
-    playerScore: document.querySelector("#player-score"),
-    botScore: document.querySelector("#bot-score"),
-    roundInput: document.querySelector("#round-number"),
-    newGameButton: document.querySelector("#new-game")
-
-}
-
-function Player(state, score) {
-
-    this.state = state;
-    this.score = score;
-
-}
-
-Player.prototype.addScore = function() {
-
-    this.score++;
-
-}
-
-Player.prototype.setState = function(state) {
-
-    this.state = state;
-
-}
-
-function Bot(state, score) {
-
-    Player.call(this, state, score);
-    this.plays = ["rock", "paper", "scissors"];
-
-}
-
-Bot.prototype = Object.create(Player.prototype);
-
-Bot.prototype.setRandomState = function() {
-        
-    this.state = this.plays[Math.floor(Math.random() * 3)];
-
-}
-
-function Game(rounds) {
-
-    this.rounds = rounds;
-    this.gameRules = {
-
-        rock: "scissors",
-        paper: "rock",
-        scissors: "paper"
+        roundDraw: 0,
+        roundFirst: 1,
+        roundSecond: 2,
+        gameDraw: 3,
+        gameFirst: 4,
+        gameSecond: 5
 
     }
 
-}
+    const TEXT_TO_EMOJI = {
 
-Game.prototype.play = function(playerFirst, playerSecond) {
-
-    playerSecond.setRandomState();
-
-    if (this.gameRules[playerFirst.state] === playerSecond.state) {
-
-        playerFirst.addScore();
-        return GAME_RESULTS.roundFirst;
-
-    } else if (this.gameRules[playerSecond.state] === playerFirst.state) {
-
-        playerSecond.addScore();
-        return GAME_RESULTS.roundSecond;
-
-    } else if (playerFirst.state === playerSecond.state) {
-
-        return GAME_RESULTS.roundDraw;
+        rock: "✊",
+        paper: "✋",
+        scissors: "✌"
 
     }
 
-}
+    const elements = {
 
-Game.prototype.run = function(playerFirst, playerSecond) {
+        playerFirstChoice: document.querySelector(".playerFirst-choice div"),
+        playerSecondChoice: document.querySelector(".playerSecond-choice div"),
+        playerFirstPoints: document.querySelector(".playerFirst-points span"),
+        playerSecondPoints: document.querySelector(".playerSecond-points span"),
+        gameResult: document.querySelector(".game-result div"),
+        gameResultDesc: document.querySelector(".game-result span"),
+        rockButton: document.querySelector("#rock"),
+        paperButton: document.querySelector("#paper"),
+        scissorsButton: document.querySelector("#scissors"),
+        roundsTotal: document.querySelector("#total-rounds"),
+        roundsLeft: document.querySelector("#rounds-left"),
+        playerScore: document.querySelector("#player-score"),
+        botScore: document.querySelector("#bot-score"),
+        roundInput: document.querySelector("#round-number"),
+        newGameButton: document.querySelector("#new-game")
 
-    if (this.rounds > 1) {
+    }
 
-        const result = this.play(playerFirst, playerSecond);
-        this.rounds--;
-        return result;
+    function Player(state, score) {
 
-    } else if (this.rounds === 1) {
+        this.state = state;
+        this.score = score;
 
-        this.play(playerFirst, playerSecond);
-        this.rounds--;
+    }
 
-        if (playerFirst.score > playerSecond.score) {
+    Player.prototype.addScore = function() {
 
-            return GAME_RESULTS.gameFirst;
+        this.score++;
 
-        } else if (playerSecond.score > playerFirst.score) {
+    }
 
-            return GAME_RESULTS.gameSecond;
+    Player.prototype.setState = function(state) {
 
-        } else if (playerFirst.score === playerSecond.score) {
+        this.state = state;
 
-            return GAME_RESULTS.gameDraw;
+    }
+
+    function Bot(state, score) {
+
+        Player.call(this, state, score);
+        this.plays = ["rock", "paper", "scissors"];
+
+    }
+
+    Bot.prototype = Object.create(Player.prototype);
+
+    Bot.prototype.setRandomState = function() {
+            
+        this.state = this.plays[Math.floor(Math.random() * 3)];
+
+    }
+
+    function Game(rounds) {
+
+        this.rounds = rounds;
+        this.gameRules = {
+
+            rock: "scissors",
+            paper: "rock",
+            scissors: "paper"
 
         }
 
     }
 
-}
+    Game.prototype.play = function(playerFirst, playerSecond) {
 
-function init() {
+        playerSecond.setRandomState();
 
-    const roundInputValue = Number(elements.roundInput.value);
-    const roundInputNumber =  roundInputValue <= 50 && roundInputValue > 0 ? roundInputValue : 5;
-    const game = new Game(roundInputNumber);
-    const player = new Player("", 0);
-    const bot = new Bot("", 0);
-    let pressed = false;
-    setScoreboard(0, 0, roundInputNumber, game.rounds);
+        if (this.gameRules[playerFirst.state] === playerSecond.state) {
 
-    function eventHandler(e) {
+            playerFirst.addScore();
+            return GAME_RESULTS.roundFirst;
 
-        if (game.rounds > 0 && pressed === false) {
+        } else if (this.gameRules[playerSecond.state] === playerFirst.state) {
 
-            player.setState(e.target.value);
-            const result = game.run(player, bot);
-            pressed = true;
-            addAnim();
-            setChoice("rock", "rock");
+            playerSecond.addScore();
+            return GAME_RESULTS.roundSecond;
 
-            setTimeout(() => {
+        } else if (playerFirst.state === playerSecond.state) {
 
-                setScoreboard(player.score, bot.score, roundInputNumber, game.rounds);
-                setChoice(player.state, bot.state);
-                setResult(result, player.state, bot.state);
-                removeAnim();
-                pressed = false;
+            return GAME_RESULTS.roundDraw;
 
-            }, 3000);
-
-        } 
+        }
 
     }
+
+    Game.prototype.run = function(playerFirst, playerSecond) {
+
+        if (this.rounds > 1) {
+
+            const result = this.play(playerFirst, playerSecond);
+            this.rounds--;
+            return result;
+
+        } else if (this.rounds === 1) {
+
+            this.play(playerFirst, playerSecond);
+            this.rounds--;
+
+            if (playerFirst.score > playerSecond.score) {
+
+                return GAME_RESULTS.gameFirst;
+
+            } else if (playerSecond.score > playerFirst.score) {
+
+                return GAME_RESULTS.gameSecond;
+
+            } else if (playerFirst.score === playerSecond.score) {
+
+                return GAME_RESULTS.gameDraw;
+
+            }
+
+        }
+
+    }
+
+    function init() {
+
+        const roundInputValue = Number(elements.roundInput.value);
+        const roundInputNumber =  roundInputValue <= 50 && roundInputValue > 0 ? roundInputValue : 5;
+        const game = new Game(roundInputNumber);
+        const player = new Player("", 0);
+        const bot = new Bot("", 0);
+        let pressed = false;
+        setScoreboard(0, 0, roundInputNumber, game.rounds);
+
+        function eventHandler(e) {
+
+            if (game.rounds > 0 && pressed === false) {
+
+                player.setState(e.target.value);
+                const result = game.run(player, bot);
+                pressed = true;
+                addAnim();
+                setChoice("rock", "rock");
+
+                setTimeout(() => {
+
+                    setScoreboard(player.score, bot.score, roundInputNumber, game.rounds);
+                    setChoice(player.state, bot.state);
+                    setResult(result, player.state, bot.state);
+                    removeAnim();
+                    pressed = false;
+
+                }, 3000);
+
+            } 
+
+        }
+
+        elements.rockButton.addEventListener("click", (e) => {
+
+            if (game.rounds > 0) {setResultDesc("", "...");}
+            eventHandler(e);
+
+        });
+        elements.paperButton.addEventListener("click", (e) => {
+            
+            if (game.rounds > 0) {setResultDesc("", "...");}
+            eventHandler(e);
+
+        });
+        elements.scissorsButton.addEventListener("click", (e) => {
+
+            if (game.rounds > 0) {setResultDesc("", "...");}
+            eventHandler(e);
+
+        });
+
+    }
+
+    elements.newGameButton.addEventListener("click", () => {
+
+        init();
+        setResultDesc("make a move!", "WAITING");
+
+    });
 
     function setResult(result, playerChoice, botChoice) {
 
         switch(result) {
-    
+
             case GAME_RESULTS.roundFirst:
-                elements.gameResult.textContent = "ROUND WON";
-                setResultDesc(playerChoice, botChoice);
+                setResultDesc(playerChoice, botChoice, "ROUND WON");
                 break;
-    
+
             case GAME_RESULTS.roundSecond:
-                elements.gameResult.textContent = "ROUND LOST";
-                setResultDesc(botChoice, playerChoice);
+                setResultDesc(botChoice, playerChoice, "ROUND LOST");
                 break;
-    
+
             case GAME_RESULTS.roundDraw:
-                elements.gameResult.textContent = "ROUND DRAW";
-                setResultDesc("it's a draw!");
+                setResultDesc("it's a draw!", "ROUND DRAW");
                 break;
-    
+
             case GAME_RESULTS.gameFirst:
-                elements.gameResult.textContent = "GAME WON";
-                setResultDesc("start a new game!");
+                setResultDesc("start a new game!", "GAME WON");
                 break;
-    
+
             case GAME_RESULTS.gameSecond:
-                elements.gameResult.textContent = "GAME LOST";
-                setResultDesc("start a new game!");
+                setResultDesc("start a new game!", "GAME LOST");
                 break;
-    
+
             case GAME_RESULTS.gameDraw:
-                elements.gameResult.textContent = "GAME DRAW";
-                setResultDesc("start a new game!");
+                setResultDesc("start a new game!", "GAME DRAW");
                 break;
             
         }
@@ -211,12 +235,14 @@ function init() {
 
     function setResultDesc(...args) {
 
-        if (args.length === 2) {
+        if (args.length === 3) {
 
+            elements.gameResult.textContent = args[2];
             elements.gameResultDesc.textContent = `${args[0]} beats ${args[1]}!`;
 
         } else {
 
+            elements.gameResult.textContent = args[1];
             elements.gameResultDesc.textContent = args[0];
 
         }
@@ -234,8 +260,8 @@ function init() {
 
     function setChoice(playerChoice, botChoice) {
 
-        elements.playerFirstChoice.textContent = RPS[playerChoice];
-        elements.playerSecondChoice.textContent = RPS[botChoice];
+        elements.playerFirstChoice.textContent = TEXT_TO_EMOJI[playerChoice];
+        elements.playerSecondChoice.textContent = TEXT_TO_EMOJI[botChoice];
 
     }
 
@@ -253,10 +279,5 @@ function init() {
 
     }
 
-    elements.rockButton.addEventListener("click", eventHandler);
-    elements.paperButton.addEventListener("click", eventHandler);
-    elements.scissorsButton.addEventListener("click", eventHandler);
+})();
 
-}
-
-elements.newGameButton.addEventListener("click", init);
