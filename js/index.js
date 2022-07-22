@@ -157,6 +157,7 @@ const rockPaperScissors = (() => {
                 const result = game.run(player, bot);
                 pressed = true;
                 addAnim();
+                toggleButtonFocus(e);
                 setChoice("rock", "rock");
 
                 setTimeout(() => {
@@ -197,7 +198,7 @@ const rockPaperScissors = (() => {
     elements.newGameButton.addEventListener("click", () => {
 
         init();
-        setResultDesc("make a move!", "WAITING");
+        setResultDesc("make a move!", "...");
 
     });
 
@@ -276,6 +277,26 @@ const rockPaperScissors = (() => {
 
         elements.playerFirstChoice.parentElement.classList.remove("shake");
         elements.playerSecondChoice.parentElement.classList.remove("shake");
+
+    }
+
+    function toggleButtonFocus(e) {
+
+        const buttonList = [elements.rockButton, elements.paperButton, elements.scissorsButton];
+
+        buttonList.forEach((button) => {
+
+            if (e.target === button) {
+
+                button.classList.add("focus");
+
+            } else {
+
+                button.classList.remove("focus");
+
+            }
+
+        });
 
     }
 
